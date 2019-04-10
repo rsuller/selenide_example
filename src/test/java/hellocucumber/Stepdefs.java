@@ -1,7 +1,5 @@
 package hellocucumber;
 
-import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import cucumber.api.java.After;
@@ -10,7 +8,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import cucumber.api.java.en.Then;
 import lombok.extern.java.Log;
-import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.FileInputStream;
@@ -18,14 +15,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.title;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 @Log
-public class Stepdefs {
+public class Stepdefs extends GoogleHomePage {
 
     @Before
     public void setUpTestEnvironment() throws IOException {
@@ -58,18 +53,18 @@ public class Stepdefs {
 
     @Then("^the page title will be \"([^\"]*)\"$")
     public void thePageTitleWillBe(String pageTitle) {
-        $("title").shouldHave(Condition.text(pageTitle));
+        checkPageTitle(pageTitleElement(), pageTitle);
     }
 
     @When("^I search for the term \"([^\"]*)\"$")
     public void iSearchForTheTerm(String searchTerm) {
-        $(By.name("q")).sendKeys(searchTerm);
-        $(By.name("btnK")).click();
+        enterText(searchTextBox(), searchTerm);
+        clickButton(searchButton());
     }
 
     @Then("^I will get a list of results to chose from$")
     public void iWillGetAListOfResultsToChoseFrom() {
-        $$("h3").shouldHave(CollectionCondition.sizeGreaterThan(1));
+        checkCollectionHasMoreThanOne(searchResultHeadings());
     }
 
     @After
