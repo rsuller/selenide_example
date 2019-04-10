@@ -1,4 +1,4 @@
-package hellocucumber;
+package hellocucumber.pages;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
@@ -23,7 +23,7 @@ public class BasePage {
         element.shouldHave(Condition.text(pageTitle));
     }
 
-
-
-
+    protected String getElementText(SelenideElement element) {
+        return element.getText();
+    }
 }

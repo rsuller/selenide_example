@@ -1,4 +1,4 @@
-package hellocucumber;
+package hellocucumber.acceptancetests;
 
 import com.codeborne.selenide.junit.TextReport;
 import cucumber.api.CucumberOptions;
