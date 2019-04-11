@@ -1,3 +1,4 @@
+@example
 Feature: This is an example feature for Selenide Testing
 
   This test will demonstrate opening a browser and doing some automated testing

@@ -30,12 +30,12 @@ public class Hooks {
             log.info(String.format("Running tests using %s browser", browser));
         }
 
-        Configuration.startMaximized = true;
         Configuration.reportsFolder = "target/surefire-reports";
+        getWebDriver().manage().window().maximize();
     }
 
     @After
     public void closeDriver() {
-        getWebDriver().close();
+        getWebDriver().quit();
     }
 }
